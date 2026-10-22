@@ -1,0 +1,7 @@
+{
+  "name": "SCRBRD — CricketOS",
+  "description": "South African school sports management and match-intelligence platform for cricket scoring, fixtures, and analytics.",
+  "prompt": "Rewrite SCRBRD CricketOS as a React application on Vite.",
+  "permissions": [],
+  "capabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

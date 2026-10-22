@@ -1,0 +1,324 @@
+{
+  "entities": {
+    "PlayerCareer": {
+      "title": "PlayerCareer",
+      "description": "Historical career statistics and aggregates for an individual cricket player.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique normalized identifier for the player",
+          "maxLength": 128
+        },
+        "fullName": {
+          "type": "string",
+          "description": "Full formal name of the player",
+          "maxLength": 100
+        },
+        "shortName": {
+          "type": "string",
+          "description": "Initial-qualified broadcast name (e.g. S. McGough)",
+          "maxLength": 50
+        },
+        "schoolId": {
+          "type": "string",
+          "description": "ID of the school team (e.g. WES, DHS, HIL, MIC)",
+          "maxLength": 20
+        },
+        "role": {
+          "type": "string",
+          "description": "Player primary discipline (Batter, Bowler, All-Rounder, Wicket-Keeper)",
+          "maxLength": 30
+        },
+        "matches": {
+          "type": "number",
+          "description": "Total matches played in career"
+        },
+        "innings": {
+          "type": "number",
+          "description": "Total batting innings"
+        },
+        "notOuts": {
+          "type": "number",
+          "description": "Total not out innings"
+        },
+        "totalRuns": {
+          "type": "number",
+          "description": "Total career runs scored"
+        },
+        "ballsFaced": {
+          "type": "number",
+          "description": "Total balls faced in career"
+        },
+        "highestScore": {
+          "type": "number",
+          "description": "Highest individual score in a single innings"
+        },
+        "battingAverage": {
+          "type": "number",
+          "description": "Career batting average (runs / (innings - notOuts))"
+        },
+        "strikeRate": {
+          "type": "number",
+          "description": "Career batting strike rate (runs / balls * 100)"
+        },
+        "fifties": {
+          "type": "number",
+          "description": "Career 50-run milestones"
+        },
+        "hundreds": {
+          "type": "number",
+          "description": "Career 100-run milestones"
+        },
+        "fours": {
+          "type": "number",
+          "description": "Total fours hit"
+        },
+        "sixes": {
+          "type": "number",
+          "description": "Total sixes hit"
+        },
+        "wickets": {
+          "type": "number",
+          "description": "Total career wickets taken"
+        },
+        "ballsBowled": {
+          "type": "number",
+          "description": "Total legal balls bowled in career"
+        },
+        "oversBowled": {
+          "type": "string",
+          "description": "Overs bowled formatted string",
+          "maxLength": 20
+        },
+        "runsConceded": {
+          "type": "number",
+          "description": "Total runs conceded as a bowler"
+        },
+        "bowlingAverage": {
+          "type": "number",
+          "description": "Career bowling average (runs conceded / wickets taken)"
+        },
+        "economyRate": {
+          "type": "number",
+          "description": "Career bowling economy (runs per 6 balls)"
+        },
+        "bestBowlingRuns": {
+          "type": "number",
+          "description": "Runs conceded in best innings bowling spell"
+        },
+        "bestBowlingWickets": {
+          "type": "number",
+          "description": "Wickets taken in best innings bowling spell"
+        },
+        "catches": {
+          "type": "number",
+          "description": "Career fielding catches taken"
+        },
+        "stumpings": {
+          "type": "number",
+          "description": "Career wicket-keeping stumpings"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "ISO timestamp of the last career stat update",
+          "maxLength": 50
+        }
+      },
+      "required": ["id", "fullName", "schoolId", "matches", "totalRuns", "wickets"]
+    },
+    "TeamRecord": {
+      "title": "TeamRecord",
+      "description": "Historical school team records and match stats.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Team identifier code",
+          "maxLength": 20
+        },
+        "schoolName": {
+          "type": "string",
+          "description": "Full school name",
+          "maxLength": 100
+        },
+        "shortCode": {
+          "type": "string",
+          "description": "3-letter school acronym",
+          "maxLength": 10
+        },
+        "matchesPlayed": {
+          "type": "number",
+          "description": "Total matches played"
+        },
+        "wins": {
+          "type": "number",
+          "description": "Total wins"
+        },
+        "losses": {
+          "type": "number",
+          "description": "Total losses"
+        },
+        "draws": {
+          "type": "number",
+          "description": "Total draws or ties"
+        },
+        "winRate": {
+          "type": "number",
+          "description": "Win rate percentage"
+        },
+        "totalRuns": {
+          "type": "number",
+          "description": "Total runs scored across all matches"
+        },
+        "wicketsTaken": {
+          "type": "number",
+          "description": "Total wickets taken across all matches"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "ISO timestamp of last update",
+          "maxLength": 50
+        }
+      },
+      "required": ["id", "schoolName", "shortCode", "matchesPlayed", "wins"]
+    },
+    "MatchRecord": {
+      "title": "MatchRecord",
+      "description": "Individual historical fixture record saved from the scoring tool.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Match ID",
+          "maxLength": 64
+        },
+        "fixtureId": {
+          "type": "string",
+          "description": "Fixture identifier",
+          "maxLength": 64
+        },
+        "fixtureName": {
+          "type": "string",
+          "description": "Full fixture name (e.g. Westville vs DHS)",
+          "maxLength": 100
+        },
+        "venue": {
+          "type": "string",
+          "description": "Match ground or venue",
+          "maxLength": 100
+        },
+        "date": {
+          "type": "string",
+          "description": "Date of match",
+          "maxLength": 30
+        },
+        "activeInningsNumber": {
+          "type": "number",
+          "description": "Current active innings (1 or 2)"
+        },
+        "totalRuns": {
+          "type": "number",
+          "description": "Current total runs"
+        },
+        "wickets": {
+          "type": "number",
+          "description": "Current total wickets"
+        },
+        "overs": {
+          "type": "string",
+          "description": "Overs completed string",
+          "maxLength": 20
+        },
+        "status": {
+          "type": "string",
+          "description": "Live match status (in_progress, completed, abandoned)",
+          "maxLength": 30
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "ISO timestamp of last update",
+          "maxLength": 50
+        }
+      },
+      "required": ["id", "fixtureName", "status"]
+    },
+    "DeliveryRecord": {
+      "title": "DeliveryRecord",
+      "description": "Ball-by-ball delivery logged from the scoring tool.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Delivery ID",
+          "maxLength": 64
+        },
+        "matchId": {
+          "type": "string",
+          "description": "Match ID this ball belongs to",
+          "maxLength": 64
+        },
+        "overNumber": {
+          "type": "number",
+          "description": "Over index"
+        },
+        "ballNumber": {
+          "type": "number",
+          "description": "Ball number in over"
+        },
+        "strikerName": {
+          "type": "string",
+          "description": "Batter on strike",
+          "maxLength": 100
+        },
+        "bowlerName": {
+          "type": "string",
+          "description": "Active bowler",
+          "maxLength": 100
+        },
+        "runsScored": {
+          "type": "number",
+          "description": "Runs scored off the bat"
+        },
+        "extraType": {
+          "type": "string",
+          "description": "Type of extra if any",
+          "maxLength": 20
+        },
+        "isWicket": {
+          "type": "boolean",
+          "description": "Whether a wicket fell on this ball"
+        },
+        "shotSector": {
+          "type": "string",
+          "description": "Wagon wheel sector",
+          "maxLength": 50
+        },
+        "timestamp": {
+          "type": "string",
+          "description": "ISO timestamp",
+          "maxLength": 50
+        }
+      },
+      "required": ["id", "matchId", "overNumber", "ballNumber", "strikerName", "bowlerName", "runsScored"]
+    }
+  },
+  "firestore": {
+    "/players/{playerId}": {
+      "schema": "#/entities/PlayerCareer",
+      "description": "Historical career statistics profile for an individual player."
+    },
+    "/teams/{teamId}": {
+      "schema": "#/entities/TeamRecord",
+      "description": "Historical team record across seasons."
+    },
+    "/matches/{matchId}": {
+      "schema": "#/entities/MatchRecord",
+      "description": "Historical match document saved from scoring sessions."
+    },
+    "/matches/{matchId}/deliveries/{deliveryId}": {
+      "schema": "#/entities/DeliveryRecord",
+      "description": "Ball-by-ball delivery events for a match."
+    }
+  }
+}

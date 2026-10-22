@@ -1,0 +1,87 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isValidId(id) {
+      return id is string && id.size() > 0 && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-\\.]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function isValidPlayer(data) {
+      return data.keys().hasAll(['id', 'fullName', 'schoolId', 'matches', 'totalRuns', 'wickets']) &&
+        data.id is string && data.id.size() <= 128 &&
+        data.fullName is string && data.fullName.size() <= 100 &&
+        data.schoolId is string && data.schoolId.size() <= 20 &&
+        data.matches is number && data.matches >= 0 &&
+        data.totalRuns is number && data.totalRuns >= 0 &&
+        data.wickets is number && data.wickets >= 0;
+    }
+
+    function isValidTeam(data) {
+      return data.keys().hasAll(['id', 'schoolName', 'shortCode', 'matchesPlayed', 'wins']) &&
+        data.id is string && data.id.size() <= 20 &&
+        data.schoolName is string && data.schoolName.size() <= 100 &&
+        data.shortCode is string && data.shortCode.size() <= 10 &&
+        data.matchesPlayed is number && data.matchesPlayed >= 0 &&
+        data.wins is number && data.wins >= 0;
+    }
+
+    function isValidMatch(data) {
+      return data.keys().hasAll(['id', 'fixtureName', 'status']) &&
+        data.id is string && data.id.size() <= 64 &&
+        data.fixtureName is string && data.fixtureName.size() <= 100 &&
+        data.status is string && data.status.size() <= 30;
+    }
+
+    function isValidDelivery(data) {
+      return data.keys().hasAll(['id', 'matchId', 'overNumber', 'ballNumber', 'strikerName', 'bowlerName', 'runsScored']) &&
+        data.id is string && data.id.size() <= 64 &&
+        data.matchId is string && data.matchId.size() <= 64 &&
+        data.overNumber is number && data.overNumber >= 0 &&
+        data.ballNumber is number && data.ballNumber >= 0 &&
+        data.strikerName is string && data.strikerName.size() <= 100 &&
+        data.bowlerName is string && data.bowlerName.size() <= 100 &&
+        data.runsScored is number && data.runsScored >= 0;
+    }
+
+    // Default deny all unknown collections
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Connection testing endpoint
+    match /test/{docId} {
+      allow read, write: if isValidId(docId);
+    }
+
+    // Players career profiles
+    match /players/{playerId} {
+      allow read: if isValidId(playerId);
+      allow create, update: if isValidId(playerId) && isValidPlayer(incoming());
+      allow delete: if false;
+    }
+
+    // School teams
+    match /teams/{teamId} {
+      allow read: if isValidId(teamId);
+      allow create, update: if isValidId(teamId) && isValidTeam(incoming());
+      allow delete: if false;
+    }
+
+    // Match records
+    match /matches/{matchId} {
+      allow read: if isValidId(matchId);
+      allow create, update: if isValidId(matchId) && isValidMatch(incoming());
+      allow delete: if false;
+
+      match /deliveries/{deliveryId} {
+        allow read: if isValidId(deliveryId);
+        allow create, update: if isValidId(deliveryId) && isValidDelivery(incoming());
+        allow delete: if false;
+      }
+    }
+  }
+}

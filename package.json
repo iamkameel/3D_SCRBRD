@@ -1,0 +1,38 @@
+{
+  "name": "scrbrd-os",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "SCRBRD — South African school sports management and match-intelligence platform. CricketOS React web application.",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0 --port 3000",
+    "build": "vite build",
+    "lint": "eslint src",
+    "preview": "vite preview --host 0.0.0.0 --port 3000",
+    "clean": "node tools/clean-workspace.mjs --keep-node-modules",
+    "clean:all": "node tools/clean-workspace.mjs --include-node-modules",
+    "clean:dry": "node tools/clean-workspace.mjs --dry-run"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "firebase": "^12.18.0",
+    "lucide-react": "^1.48.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "recharts": "^3.10.1",
+    "tailwindcss": "^4.3.3",
+    "three": "^0.186.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@types/node": "^22.20.2",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "eslint": "^10.12.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "globals": "^17.13.0",
+    "typescript": "^5.6.3",
+    "vite": "^6.0.7"
+  }
+}
